@@ -1,45 +1,46 @@
-
 /*header {
     margin: auto;
     width: 70%;
 }*/
 
-header h4{
+header h4 {
     margin: 0px 10px;
     color: lightgray;
 }
 
 table.normal {
     width: 100%;
+    border:solid 1px #008cba;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
 .normal th {
     padding: 5px;
+    color: #fff;
 }
 
 .normal th,
 .normal td {
-    border: 1px solid #F4F4F4;
-    border-collapse: collapse;
+    border: 1px solid #008cba;
     text-align: left;
+
 }
 
 th {
-    background-color: #EEEEEE;
+    background-color: #008cba;
 }
 
 tr:nth-child(even) {
-    background: #F9F9F9
+    background: lightgrey;
 }
 
 tr:nth-child(odd) {
-    background: #FFFFFF
+    background: #FFFFFF;
 }
 
 .normal tbody tr:hover {
-    background: #ccc
+    background: #ADD8E6;
 }
 
 button,
@@ -50,8 +51,8 @@ th {
 button {
     margin: 5px;
     background: #00A65A;
-    padding: 3px 10px 3px 5px;
-    height: 25px;
+    padding: 3px 10px 3px 5px !important;
+    height: 35px;
     border: 1px solid #00A65A;
     border-radius: 3px;
     color: #000;
@@ -69,12 +70,14 @@ button:disabled {
 button.deleteBtn {
     background: #F39C12;
     padding: 3px 10px 3px 5px;
-    height: 25px;
     border: 1px solid #E8483F;
     border-radius: 3px;
     color: #000;
 }
-
+button.deleteBtn,button.editBtn
+{
+    height:25px !important;
+}
 .normal tbody tr:hover button.editBtn,
 .normal tbody tr:hover button.editBtn {
     color: #fff
@@ -82,7 +85,7 @@ button.deleteBtn {
 
 section.container {
     margin: auto;
-    width: 70%;    
+    width: 70%;
     min-width: 950px;
 }
 
@@ -92,6 +95,7 @@ section.container div {
 
 
 /* Case - Styles */
+
 nav.case {
     float: right;
     padding: 0px 10px;
@@ -158,37 +162,10 @@ form.caseForm input {
 }
 
 
-/* Employee module styles */
-
-form.employeeForm {
-    background-color: lightcyan;
-    width: 15%;
-    min-width: 170px;
-    margin: auto;
-    border: solid 1px gray;
-    text-align: center;
-}
-
-form.employeeForm div {
-    margin: 5px;
-    text-align: left;
-}
-
-form.employeeForm input {
-    padding: 1px 1px 2px 1px;
-    font: inherit;
-}
-
-form.employeeForm .action {
-    text-align: center;
-}
-
-
 /* Angular specific styles */
 
 input.ng-invalid.ng-dirty {
-    background-color: orangered;
-    color: white;
+    border:solid 1px orangered;
 }
 
 input.ng-valid.ng-dirty {
@@ -202,4 +179,35 @@ input.ng-valid.ng-dirty {
 
 .navbar {
     margin-bottom: 0px;
+}
+
+.employeeForm input
+{
+    border-radius: 3px;
+}
+.employeeForm .panel
+{
+    margin-top:20px;
+    border-radius: 4px;
+}
+.employeeForm label
+{
+    font-weight: bold;
+    padding-right:0px !important;
+}
+.employeeForm
+{
+    padding-bottom: 20px;
+}
+
+input[ng-model="search"]
+{
+    height:30px !important;
+    border:solid 1px #ccc;
+    border-radius: 3px;
+}
+
+/* Override toastr font size - affected by bootstrap */ 
+#toast-container {
+    font-size: 13px;
 }

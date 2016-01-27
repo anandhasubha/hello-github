@@ -1,56 +1,64 @@
-<form name="employeeForm" class="employeeForm" ng-submit="editDone()">
-    <h2>Employee Page</h2>
-    <div class="fieldRow">
-        <div class="fLabel">Employee Name :</div>
-        <div class="fField">
-            <input ng-model="empData.name" required>
-        </div>
-    </div>
-    <div class="fieldRow">
-        <div class="fLabel">Age :</div>
-        <div class="fField">
-            <input name="employeeAge" ng-model="empData.age" type="number" max=100 min=18>
-            <span ng-show="employeeForm.employeeAge.$invalid" class="error-msg">Age exceeds the range allowed!</span>
-        </div>
-    </div>
-    <div class="fieldRow">
-        <div class="fLabel">Address :</div>
-        <div class="fField">
-            <input ng-model="empData.address">
-        </div>
-    </div>
-    <div class="fieldRow">
-        <div class="fLabel">City :</div>
-        <div class="fField">
-            <input ng-model="empData.city" required>
-        </div>
-    </div>
-    <div class="fieldRow">
-        <div class="fLabel">State :</div>
-        <div class="fField">
-            <input ng-model="empData.state">
-        </div>
-    </div>
-    <div class="fieldRow">
-        <div class="fLabel">Postal Code :</div>
-        <div class="fField">
-            <input ng-model="empData.postalCode" required>
-        </div>
-    </div>
-    <div class="fieldRow">
-        <div class="fLabel">Phone :</div>
-        <div class="fField">
-            <input name="employeePhone" ng-model="empData.phone" required ng-pattern="/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/">
-            <br />
-            <span ng-show="employeeForm.employeePhone.$error.pattern" class="error-msg">Invalid phone number!</span>
-        </div>
-    </div>
-    <div class="fieldRow action">
-        <button type="submit" ng-disabled="employeeForm.$invalid || employeeForm.$pristine">
-            <i class="fa fa-check">Done</i>
-        </button>
-        <!-- "A button element with no type attribute specified represents the same thing as a button element with its type attribute set to "submit" 
+<div class="container ">
+    <form name="employeeForm" class="employeeForm form-horizontal col-md-9 col-sm-12 col-xs-12 col-lg-9" ng-submit="editDone()">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Edit Employee</div>
+            <div class="panel-body">
+                <div class="fieldRow form-group">
+                    <label class="control-label col-sm-2" for="employee name">Employee Name :</label>
+                    <div class="fField col-sm-10">
+                        <input ng-model="empData.name" required class="form-control">
+                    </div>
+                </div>
+                <div class="fieldRow form-group">
+                    <label class="control-label col-sm-2" for="age">Age :</label>
+                    <div class="fField col-sm-10">
+                        <input name="employeeAge" ng-model="empData.age" type="number" maxlength="3" max=100 min=18 class="form-control">
+                        <span ng-show="employeeForm.employeeAge.$invalid" class="error-msg">Allowed range is 18 to 100!</span>
+                    </div>
+                </div>
+                <div class="fieldRow form-group">
+                    <label class="control-label col-sm-2" for="address">Address :</label>
+                    <div class="fField col-sm-10">
+                        <input ng-model="empData.address" required class="form-control">
+                    </div>
+                </div>
+                <div class="fieldRow form-group">
+                    <label class="control-label col-sm-2" for="city">City :</label>
+                    <div class="fField col-sm-10">
+                        <input ng-model="empData.city" required class="form-control">
+                    </div>
+                </div>
+                <div class="fieldRow form-group">
+                    <label class="control-label col-sm-2" for="state">State :</label>
+                    <div class="fField col-sm-10">
+                        <input ng-model="empData.state" required class="form-control">
+                    </div>
+                </div>
+                <div class="fieldRow form-group">
+                    <label class="control-label col-sm-2" for="postal code">Postal Code :</label>
+                    <div class="fField col-sm-10">
+                        <input ng-model="empData.postalCode" required class="form-control">
+                    </div>
+                </div>
+                <div class="fieldRow form-group">
+                    <label class="control-label col-sm-2" for="phone">Phone :</label>
+                    <div class="fField col-sm-10">
+                        <input name="employeePhone" ng-model="empData.phone" required ng-pattern="/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/" class="form-control">
+                        <br />
+                        <span ng-show="employeeForm.employeePhone.$error.pattern" class="error-msg">Invalid phone number!</span>
+                    </div>
+                </div>
+                <div class="fieldRow action">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <button type="submit" ng-disabled="employeeForm.$invalid || employeeForm.$pristine" class=" btn-primary">
+                            <i class="fa fa-check">Save</i>
+                        </button>
+                        <!-- "A button element with no type attribute specified represents the same thing as a button element with its type attribute set to "submit" 
             Ref: http://stackoverflow.com/questions/21863821/angularjs-ng-submit-event-handler-gets-called-even-when-not-submitting-->
-        <button type="button" value="Cancel" ng-click="cancelEdit()"> <i class="fa fa-times">Cancel</i> </button>
-    </div>
-</form>
+                        <button type="button" value="Cancel" ng-click="cancelEdit()" class=" btn-primary"> <i class="fa fa-times">Cancel</i> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
