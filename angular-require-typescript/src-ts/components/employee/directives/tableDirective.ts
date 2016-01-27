@@ -26,10 +26,10 @@ class EmployeeTable implements ng.IDirective {
         reverse: "="
     };
 
-    templateUrl = '/dist/components/employee/directives/tableView.html';
+    templateUrl = 'components/employee/directives/tableView.html';
 
     constructor(private $filter: ng.IFilterService
-        , private $location: ng.ILocationService) {
+        , private $location: ng.ILocationService, private cacheSrvc: any) {
     };
 
     link = (scope: IEmpTableDirScope, element: ng.IAugmentedJQuery, attrs: ng.IAttributes) => {
@@ -39,6 +39,9 @@ class EmployeeTable implements ng.IDirective {
         }
         scope.deleteFn = function(index) {
             scope.tdata.splice(index, 1);
+            var empdata=self.cacheSrvc.get("empList",scope.tdata);
+            empdata.recordSet=scope.tdata;
+            self.cacheSrvc.set("empList",empdata);
         }
         scope.sortBy_head = function(head) {
             scope.reverse = !scope.reverse;
@@ -47,8 +50,8 @@ class EmployeeTable implements ng.IDirective {
     }
 
     static factory(): ng.IDirectiveFactory {
-        const directive = ($filter: ng.IFilterService, $location: ng.ILocationService) => new EmployeeTable($filter, $location);
-        directive.$inject = ['$filter','$location'];
+        const directive = ($filter: ng.IFilterService, $location: ng.ILocationService, cacheSrvc: any) => new EmployeeTable($filter, $location, cacheSrvc);
+        directive.$inject = ['$filter','$location', 'cacheSrvc'];
         return directive;
     }
 }

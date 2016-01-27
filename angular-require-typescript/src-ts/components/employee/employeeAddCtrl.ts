@@ -16,20 +16,23 @@ interface IEmployeeAddCtrlScope extends ng.IScope{
 }
 
 export class EmployeeAddCtrl {
-    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc'];
+    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc','cacheSrvc'];
     public constructor(public $scope: IEmployeeAddCtrlScope
         , private $location: ng.ILocationService
         , private $routeParams: any
         , private employeeSrvc: any
-        , private ToastrSrvc: any) {
+        , private ToastrSrvc: any
+        , private cacheSrvc: any) {
         var recordset = employeeSrvc.employeeData.recordSet;
         var id = recordset[recordset.length - 1].id;
         $scope.empData = {
             id:++id
         };
+        
         $scope.addDone = function() {
            $scope.empData.Action='';
             recordset.push($scope.empData);
+            cacheSrvc.set("empList",employeeSrvc.employeeData)
             ToastrSrvc.notifySuccess('Employee added successfully');
             closeAddPage();
         };

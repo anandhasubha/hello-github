@@ -16,16 +16,18 @@ interface IEmployeeEditCtrlScope {
 }
 
 export class EmployeeEditCtrl {
-    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc'];
+    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc','cacheSrvc'];
     public constructor(public $scope: IEmployeeEditCtrlScope
         , private $location: ng.ILocationService
         , private $routeParams: any
         , private employeeSrvc: any
-        , private ToastrSrvc: any) {
+        , private ToastrSrvc: any
+        , private cacheSrvc: any) {
         $scope.empData = angular.copy(employeeSrvc.getEmployee($routeParams.id));
 
         $scope.editDone = function() {
             employeeSrvc.employeeData.recordSet[$routeParams.id - 1] = $scope.empData; 
+            cacheSrvc.set('empList',employeeSrvc.employeeData);
             ToastrSrvc.notifySuccess('Employee updated successfully');
             closeEditPage();
         };

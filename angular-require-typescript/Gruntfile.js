@@ -5,8 +5,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-json-server');
-    grunt.loadNpmTasks('grunt-concurrent');
+    grunt.loadNpmTasks('grunt-angular-templates');
 
     // Configure grunt here
     grunt.initConfig({
@@ -17,7 +16,7 @@ module.exports = function (grunt) {
             htmlToDist: {
                 cwd: './src-ts',
                 expand: true,
-                src: ['**/*.html'],
+                src: ['index.html'],
                 dest: 'dist/'
             },
         },
@@ -58,39 +57,41 @@ module.exports = function (grunt) {
                 }
             },
         },
-        
-        json_server: {
+
+        ngtemplates: {
+
             options: {
-                port: 3000,
-                hostname: 'localhost',
-                db: 'data/employeeList.json'
-            }
-        },
-        
-          concurrent: {
-            server: {
-                tasks: [
-                    'json_server',
-                    'connect:server'
-                ],
-                options: {
-                    logConcurrentOutput: true
+                module: 'angularApp.employee',
+                htmlmin: {
+                    collapseBooleanAttributes: true,
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    removeEmptyAttributes: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true
                 }
+
+            },
+
+            dist: {
+                cwd: 'src-ts',
+                src: 'components/employee/**/*.html',
+                dest: 'dist/templates.js',
             }
+
         }
     });
-
-    grunt.registerTask("default", ["ts:dev"]);
-    grunt.registerTask('jsonServer', ['concurrent:server']);
-    // grunt.registerTask("server", ["connect:server"]);
-
     grunt.registerTask('server', function () {
         grunt.task.run([
             'clean:dist',
             'ts:dist',
             'copy:htmlToDist',
-            'jsonServer'
+            'ngtemplates:dist',
+            'connect:server'
         ]);
     });
 
+    grunt.registerTask("default", ['server']);
 }
