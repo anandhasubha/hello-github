@@ -1,16 +1,17 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     // load the task
     grunt.loadNpmTasks("grunt-ts");
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-json-server');
+    grunt.loadNpmTasks('grunt-concurrent');
 
     // Configure grunt here
     grunt.initConfig({
         clean: {
-            dist: ['dist'],
-            test: ['test']
+            dist: ['dist']
         },
         copy: {
             htmlToDist: {
@@ -25,7 +26,7 @@ module.exports = function(grunt) {
                 src: [
                     './typings/tsd.d.ts',
                     'src-ts/**/*.ts',
-                    // '!./**/*.d.ts',
+                // '!./**/*.d.ts',
                     '!./baseDir.ts'
                 ],
                 cwd: './',
@@ -57,17 +58,38 @@ module.exports = function(grunt) {
                 }
             },
         },
+        
+        json_server: {
+            options: {
+                port: 3000,
+                hostname: 'localhost',
+                db: 'data/employeeList.json'
+            }
+        },
+        
+          concurrent: {
+            server: {
+                tasks: [
+                    'json_server',
+                    'connect:server'
+                ],
+                options: {
+                    logConcurrentOutput: true
+                }
+            }
+        }
     });
 
     grunt.registerTask("default", ["ts:dev"]);
+    grunt.registerTask('jsonServer', ['concurrent:server']);
     // grunt.registerTask("server", ["connect:server"]);
 
-    grunt.registerTask('server', function() {
+    grunt.registerTask('server', function () {
         grunt.task.run([
             'clean:dist',
             'ts:dist',
             'copy:htmlToDist',
-            'connect:server',
+            'jsonServer'
         ]);
     });
 

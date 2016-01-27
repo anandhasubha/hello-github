@@ -1,0 +1,56 @@
+<form name="employeeForm" class="employeeForm" ng-submit="addDone()">
+    <h2>Employee Page</h2>
+    <div class="fieldRow">
+        <div class="fLabel">Employee Name :</div>
+        <div class="fField">
+            <input ng-model="empData.name" required>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="fLabel">Age :</div>
+        <div class="fField">
+            <input name="employeeAge" ng-model="empData.age" type="number" max=100 min=18>
+            <span ng-show="employeeForm.employeeAge.$invalid" class="error-msg">Age exceeds the range allowed!</span>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="fLabel">Address :</div>
+        <div class="fField">
+            <input ng-model="empData.address">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="fLabel">City :</div>
+        <div class="fField">
+            <input ng-model="empData.city" required>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="fLabel">State :</div>
+        <div class="fField">
+            <input ng-model="empData.state">
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="fLabel">Postal Code :</div>
+        <div class="fField">
+            <input ng-model="empData.postalCode" required>
+        </div>
+    </div>
+    <div class="fieldRow">
+        <div class="fLabel">Phone :</div>
+        <div class="fField">
+            <input name="employeePhone" ng-model="empData.phone" required ng-pattern="/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/">
+            <br />
+            <span ng-show="employeeForm.employeePhone.$error.pattern" class="error-msg">Invalid phone number!</span>
+        </div>
+    </div>
+    <div class="fieldRow action">
+        <button type="submit" ng-disabled="employeeForm.$invalid || employeeForm.$pristine">
+            <i class="fa fa-check">Done</i>
+        </button>
+        <!-- "A button element with no type attribute specified represents the same thing as a button element with its type attribute set to "submit" 
+            Ref: http://stackoverflow.com/questions/21863821/angularjs-ng-submit-event-handler-gets-called-even-when-not-submitting-->
+        <button type="button" value="Cancel" ng-click="cancelAdd()"> <i class="fa fa-times">Cancel</i> </button>
+    </div>
+</form>

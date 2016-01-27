@@ -42,7 +42,7 @@ class EmployeeTable implements ng.IDirective {
         }
         scope.sortBy_head = function(head) {
             scope.reverse = !scope.reverse;
-            scope.tdata = this.$filter('orderBy')(scope.tdata, head, scope.reverse);
+            scope.tdata = self.$filter('orderBy')(scope.tdata, head, scope.reverse);
         };
     }
 

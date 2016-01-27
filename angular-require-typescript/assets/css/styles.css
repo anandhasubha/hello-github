@@ -1,7 +1,3 @@
-body {
-    font-size: 12px;
-    font-family: helvetica, calibri, arial;
-}
 
 /*header {
     margin: auto;
@@ -202,4 +198,8 @@ input.ng-valid.ng-dirty {
 .error-msg {
     color: red;
     font-size: 0.8em;
+}
+
+.navbar {
+    margin-bottom: 0px;
 }

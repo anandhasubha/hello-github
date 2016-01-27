@@ -22,8 +22,10 @@ export class EmployeeEditCtrl {
         , private $routeParams: any
         , private employeeSrvc: any
         , private ToastrSrvc: any) {
-        $scope.empData = employeeSrvc.getEmployee($routeParams.id);
+        $scope.empData = angular.copy(employeeSrvc.getEmployee($routeParams.id));
+
         $scope.editDone = function() {
+            employeeSrvc.employeeData.recordSet[$routeParams.id - 1] = $scope.empData; 
             ToastrSrvc.notifySuccess('Employee updated successfully');
             closeEditPage();
         };

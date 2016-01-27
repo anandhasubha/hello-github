@@ -21,6 +21,7 @@
 ///<amd-dependency path="./components/employee/employeeSrvc"/>
 ///<amd-dependency path="./components/employee/employeeListCtrl"/>
 ///<amd-dependency path="./components/employee/employeeEditCtrl"/>
+///<amd-dependency path="./components/employee/employeeAddCtrl"/>
 ///<amd-dependency path="./components/employee/directives/tableDirective"/>
 
 var app = angular.module('angularApp', ['ngRoute',

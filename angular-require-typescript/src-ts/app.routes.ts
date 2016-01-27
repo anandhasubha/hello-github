@@ -12,7 +12,7 @@ import app = require('app');
 app.config(['$routeProvider', 'appConstant',
     function($routeProvider:ng.route.IRouteProvider, appConstant) {
         $routeProvider
-            .when('/employee', {
+            .when('/employees', {
                 templateUrl: "components/employee/partials/listEmployee.html",
                 controller: "employeeListCtrl",
                 resolve: {
@@ -20,12 +20,15 @@ app.config(['$routeProvider', 'appConstant',
                         return employeeSrvc.getEmployees();
                     }
                 }
+            }).when('/employee/add', {
+                templateUrl: "components/employee/partials/addEmployee.html",
+                controller: 'employeeAddCtrl'
             }).when('/employee/:id', {
                 templateUrl: "components/employee/partials/editEmployee.html",
                 controller: 'employeeEditCtrl'
             }).otherwise({
                 redirectTo: appConstant.PATH_DEFAULT_MODULE
-            });
+            })
         console.debug("Router configured");
     }
 ]);
