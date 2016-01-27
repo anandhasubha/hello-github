@@ -1,0 +1,24 @@
+<div>
+    <input ng-model="search">
+    <table class="normal">
+        <thead>
+            <tr>
+                <!-- <th> No </th> -->
+                <th ng-repeat="(key,data) in headers " ng-click="sortBy_head(key)">{{data}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="objData in tdata | filter:search track by $index">
+                <td ng-repeat="(key,data) in objData">
+                    <div ng-switch on="key">
+                        <div ng-switch-when="Action">
+                            <button class="editBtn" ng-click="editFn(objData.id, $parent.$parent.$index)"> <i class="fa fa-fw fa-edit"></i> Edit</button>
+                            <button class="deleteBtn" ng-click="deleteFn($parent.$parent.$index)"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                        </div>
+                        <div ng-switch-default>{{data}}</div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

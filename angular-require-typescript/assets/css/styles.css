@@ -1,0 +1,205 @@
+body {
+    font-size: 12px;
+    font-family: helvetica, calibri, arial;
+}
+
+/*header {
+    margin: auto;
+    width: 70%;
+}*/
+
+header h4{
+    margin: 0px 10px;
+    color: lightgray;
+}
+
+table.normal {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.normal th {
+    padding: 5px;
+}
+
+.normal th,
+.normal td {
+    border: 1px solid #F4F4F4;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th {
+    background-color: #EEEEEE;
+}
+
+tr:nth-child(even) {
+    background: #F9F9F9
+}
+
+tr:nth-child(odd) {
+    background: #FFFFFF
+}
+
+.normal tbody tr:hover {
+    background: #ccc
+}
+
+button,
+th {
+    cursor: pointer;
+}
+
+button {
+    margin: 5px;
+    background: #00A65A;
+    padding: 3px 10px 3px 5px;
+    height: 25px;
+    border: 1px solid #00A65A;
+    border-radius: 3px;
+    color: #000;
+}
+
+button.hover {
+    color: #fff;
+}
+
+button:disabled {
+    color: graytext;
+    cursor: normal;
+}
+
+button.deleteBtn {
+    background: #F39C12;
+    padding: 3px 10px 3px 5px;
+    height: 25px;
+    border: 1px solid #E8483F;
+    border-radius: 3px;
+    color: #000;
+}
+
+.normal tbody tr:hover button.editBtn,
+.normal tbody tr:hover button.editBtn {
+    color: #fff
+}
+
+section.container {
+    margin: auto;
+    width: 70%;    
+    min-width: 950px;
+}
+
+section.container div {
+    margin: 5px;
+}
+
+
+/* Case - Styles */
+nav.case {
+    float: right;
+    padding: 0px 10px;
+}
+
+div.container.case {
+    background: #fff no-repeat right top;
+    /*border: solid 1px darkcyan;*/
+    width: 750px;
+    height: 420px;
+    margin: auto;
+    padding: 0px 20px;
+    text-align: center;
+}
+
+div.container.case .left,
+div.container.case .right {
+    float: left;
+    width: 50%;
+}
+
+div.container.case .title {
+    background-color: darkcyan;
+    border-bottom: solid 1px darkcyan;
+    color: white;
+}
+
+div.container.case section {
+    border: solid 1px darkcyan;
+}
+
+div.container.case .title h3 {
+    margin: 0px;
+    padding: 5px;
+}
+
+div.container.case .content {
+    background-color: lightcyan;
+    padding: 5px;
+}
+
+div.container.case .mid-text {
+    border: none;
+}
+
+form.caseForm {
+    background-color: lightcyan;
+    border: solid 1px darkcyan;
+    width: 15%;
+    min-width: 170px;
+    margin: auto;
+    text-align: center;
+}
+
+form.caseForm div {
+    margin: 5px;
+    text-align: left;
+}
+
+form.caseForm input {
+    border: solid 1px darkcyan;
+    padding: 1px 1px 2px 1px;
+    font: inherit;
+}
+
+
+/* Employee module styles */
+
+form.employeeForm {
+    background-color: lightcyan;
+    width: 15%;
+    min-width: 170px;
+    margin: auto;
+    border: solid 1px gray;
+    text-align: center;
+}
+
+form.employeeForm div {
+    margin: 5px;
+    text-align: left;
+}
+
+form.employeeForm input {
+    padding: 1px 1px 2px 1px;
+    font: inherit;
+}
+
+form.employeeForm .action {
+    text-align: center;
+}
+
+
+/* Angular specific styles */
+
+input.ng-invalid.ng-dirty {
+    background-color: orangered;
+    color: white;
+}
+
+input.ng-valid.ng-dirty {
+    /*background-color: darkcyan;*/
+}
+
+.error-msg {
+    color: red;
+    font-size: 0.8em;
+}
