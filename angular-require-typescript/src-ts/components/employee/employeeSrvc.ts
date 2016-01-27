@@ -9,7 +9,6 @@
 import employeeModule = require('./employeeModule');
 
 export interface IEmployeeSrvc {
-    employeeData: any;
     getEmployees: () => any;
     getEmployee: (empID: any) => any;
 }
@@ -17,32 +16,29 @@ export interface IEmployeeSrvc {
 class EmployeeSrvc implements IEmployeeSrvc {
     static $inject = ['$http', '$q', 'appConstant', '$filter', 'cacheSrvc'];
 
-    public employeeData: any;
-
     constructor(public $http: ng.IHttpService,
         private $q: ng.IQService, private appConstant: any,
         private $filter: ng.IFilterService,
         public cacheSrvc: any
-    ) {
-        this.employeeData = this.cacheSrvc.get("empList");
-    }
+    ) {}
 
     //Retrieve all employees for listing
     getEmployees = () => {
         var self = this;
         var deferred = self.$q.defer();
-        if (self.employeeData !== null) {
-            deferred.resolve(self.employeeData);
+        var empList = this.cacheSrvc.get("empList");
+
+        if (empList !== null && empList !== undefined) {
+            deferred.resolve(empList);
         } else {
             self.$http.get(self.appConstant.JSON_EMPLOYEES_LIST)
                 .success(function(response: any) {
                     self.cacheSrvc.set("empList", response.data);
-                    self.employeeData = self.cacheSrvc.get("empList");
-                    deferred.resolve(self.employeeData);
+                    deferred.resolve(response.data);
                 })
                 .error(function(response: any) {
                     console.error("Error : " + response.msg);
-                    deferred.reject(self.employeeData);
+                    deferred.reject(response.msg);
                 });
         }
         return deferred.promise;
@@ -50,11 +46,14 @@ class EmployeeSrvc implements IEmployeeSrvc {
 
     //Retrieve on employee for modifying
     getEmployee = (empID) => {
-        var employee = this.$filter('filter')(this.cacheSrvc.get("empList").recordSet, function(record, index) {
-            if (record) {
-                return (record.id + '' == empID);
-            }
-        })[0];
+        var empList = this.cacheSrvc.get("empList");
+        var employee = null;
+        if (empList)
+            employee = this.$filter('filter')(empList.recordSet, function(record, index) {
+                if (record) {
+                    return (record.id + '' == empID);
+                }
+            })[0];
         return employee;
     }
 }

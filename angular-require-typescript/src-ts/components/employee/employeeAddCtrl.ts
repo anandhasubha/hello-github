@@ -9,30 +9,39 @@
  */
 import employeeModule = require('./employeeModule');
 
-interface IEmployeeAddCtrlScope extends ng.IScope{
+interface IEmployeeAddCtrlScope extends ng.IScope {
     empData: any;
     addDone: () => void;
     cancelAdd: () => void;
 }
 
 export class EmployeeAddCtrl {
-    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc','cacheSrvc'];
-    public constructor(public $scope: IEmployeeAddCtrlScope
-        , private $location: ng.ILocationService
-        , private $routeParams: any
-        , private employeeSrvc: any
-        , private ToastrSrvc: any
-        , private cacheSrvc: any) {
-        var recordset = employeeSrvc.employeeData.recordSet;
-        var id = recordset[recordset.length - 1].id;
-        $scope.empData = {
-            id:++id
-        };
-        
+    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc', 'cacheSrvc'];
+    public constructor(public $scope: IEmployeeAddCtrlScope, private $location: ng.ILocationService,
+        private $routeParams: any, private employeeSrvc: any, private ToastrSrvc: any, private cacheSrvc: any) {
+        var empList = null;
+        employeeSrvc.getEmployees().then(function(data) {
+            empList = data;
+
+            // var id = recordset[recordset.length - 1].id;
+            var employees = empList.recordSet;
+            var newId = Math.max.apply(Math, employees.map(function(employee) {
+                return employee.id;
+            }));
+
+            //Get the new id
+            $scope.empData = {
+                id: ++newId
+            };
+        });
+
         $scope.addDone = function() {
-           $scope.empData.Action='';
-            recordset.push($scope.empData);
-            cacheSrvc.set("empList",employeeSrvc.employeeData)
+            //Push record in scope
+            $scope.empData.Action = '';
+            empList.recordSet.push($scope.empData);
+
+            //Update cache
+            cacheSrvc.set("empList", empList);
             ToastrSrvc.notifySuccess('Employee added successfully');
             closeAddPage();
         };

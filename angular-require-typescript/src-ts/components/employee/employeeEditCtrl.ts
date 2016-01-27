@@ -12,22 +12,25 @@ import employeeModule = require('./employeeModule');
 interface IEmployeeEditCtrlScope {
     empData: any;
     editDone: () => void;
-    cancelEdit: () => void;    
+    cancelEdit: () => void;
 }
 
 export class EmployeeEditCtrl {
-    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc','cacheSrvc'];
-    public constructor(public $scope: IEmployeeEditCtrlScope
-        , private $location: ng.ILocationService
-        , private $routeParams: any
-        , private employeeSrvc: any
-        , private ToastrSrvc: any
-        , private cacheSrvc: any) {
+    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc', 'cacheSrvc'];
+    public constructor(public $scope: IEmployeeEditCtrlScope, private $location: ng.ILocationService,
+        private $routeParams: any, private employeeSrvc: any, private ToastrSrvc: any, private cacheSrvc: any) {
         $scope.empData = angular.copy(employeeSrvc.getEmployee($routeParams.id));
 
         $scope.editDone = function() {
-            employeeSrvc.employeeData.recordSet[$routeParams.id - 1] = $scope.empData; 
-            cacheSrvc.set('empList',employeeSrvc.employeeData);
+            var empList = cacheSrvc.get('empList');
+            var updatedEmpId = -1;
+            empList.recordSet.forEach(function(employee, index) {
+                if (employee.id == $scope.empData.id) {
+                    updatedEmpId = index;
+                }
+            });
+            empList.recordSet[updatedEmpId] = $scope.empData;
+            cacheSrvc.set('empList', empList);
             ToastrSrvc.notifySuccess('Employee updated successfully');
             closeEditPage();
         };
