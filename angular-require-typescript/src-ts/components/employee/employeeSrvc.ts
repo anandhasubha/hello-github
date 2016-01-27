@@ -23,7 +23,7 @@ class EmployeeSrvc implements IEmployeeSrvc {
         private $q: ng.IQService, private appConstant: any,
         private $filter: ng.IFilterService,
         public cacheSrvc: any
-        ) {
+    ) {
         this.employeeData = this.cacheSrvc.get("empList");
     }
 
@@ -36,7 +36,7 @@ class EmployeeSrvc implements IEmployeeSrvc {
         } else {
             self.$http.get(self.appConstant.JSON_EMPLOYEES_LIST)
                 .success(function(response: any) {
-                    self.cacheSrvc.set("empList",response.data);
+                    self.cacheSrvc.set("empList", response.data);
                     self.employeeData = self.cacheSrvc.get("empList");
                     deferred.resolve(self.employeeData);
                 })
@@ -51,7 +51,9 @@ class EmployeeSrvc implements IEmployeeSrvc {
     //Retrieve on employee for modifying
     getEmployee = (empID) => {
         var employee = this.$filter('filter')(this.cacheSrvc.get("empList").recordSet, function(record, index) {
-            return (record.id + '' == empID);
+            if (record) {
+                return (record.id + '' == empID);
+            }
         })[0];
         return employee;
     }

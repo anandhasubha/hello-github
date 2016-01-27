@@ -10,7 +10,7 @@ header h4 {
 
 table.normal {
     width: 100%;
-    border:solid 1px #008cba;
+    border:solid 1px #222222;
     border-collapse: collapse;
     margin-top: 10px;
 }
@@ -22,13 +22,13 @@ table.normal {
 
 .normal th,
 .normal td {
-    border: 1px solid #008cba;
+    border: 1px solid #222222;
     text-align: left;
 
 }
 
 th {
-    background-color: #008cba;
+    background-color: #222222;
 }
 
 tr:nth-child(even) {
@@ -50,10 +50,10 @@ th {
 
 button {
     margin: 5px;
-    background: #00A65A;
+    background: #F39C12;
     padding: 3px 10px 3px 5px !important;
     height: 35px;
-    border: 1px solid #00A65A;
+    border: 1px solid #F39C12;
     border-radius: 3px;
     color: #000;
 }
@@ -68,9 +68,9 @@ button:disabled {
 }
 
 button.deleteBtn {
-    background: #F39C12;
+    background: #A22B2B;
     padding: 3px 10px 3px 5px;
-    border: 1px solid #E8483F;
+    border: 1px solid #A22B2B;
     border-radius: 3px;
     color: #000;
 }
@@ -187,8 +187,14 @@ input.ng-valid.ng-dirty {
 }
 .employeeForm .panel
 {
+    border:solid 1px #222222;
     margin-top:20px;
     border-radius: 4px;
+}
+.panel-primary > .panel-heading, .btn-primary,.btn-primary.disabled,.btn-primary.disabled:hover
+{
+    border:solid 1px #222222 !important;
+    background-color: #222222 !important;
 }
 .employeeForm label
 {
