@@ -15,15 +15,15 @@ interface IEmployeeEditCtrlScope {
     closeEditPage: () => void;
 }
 
-export class EmployeeEditCtrl implements IEmployeeEditCtrlScope{
-    static $inject = ['$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc'];
-    public empData: any ={};
+export class EmployeeEditCtrl implements IEmployeeEditCtrlScope {
+    static $inject: Array < string > = ['$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc'];
+    public empData: any = {};
     public editDone;
     public closeEditPage;
     public constructor(private $location: ng.ILocationService,
         private $routeParams: any, private employeeSrvc: any, private ToastrSrvc: any) {
-        var vm=this; 
-        
+        var vm = this;
+
         vm.empData = angular.copy(employeeSrvc.getEmployee($routeParams.id));
 
         vm.editDone = function() {
@@ -31,7 +31,7 @@ export class EmployeeEditCtrl implements IEmployeeEditCtrlScope{
             ToastrSrvc.notifySuccess('Employee updated successfully');
             vm.closeEditPage();
         };
-       
+
         vm.closeEditPage = function() {
             $location.path('/employee');
         };

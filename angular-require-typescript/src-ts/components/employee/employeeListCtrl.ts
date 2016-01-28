@@ -1,12 +1,12 @@
 /**
-*@ngdoc object
-*@name angularApp.employee.employeeListCtrl
-*@description
-* <P>
-* Invokes appropriate services to retrieve all employee from backend service 
+ *@ngdoc object
+ *@name angularApp.employee.employeeListCtrl
+ *@description
+ * <P>
+ * Invokes appropriate services to retrieve all employee from backend service 
  * and updates View state via scope.
-* </p>
-*/
+ * </p>
+ */
 
 import employeeModule = require('./employeeModule');
 
@@ -17,15 +17,14 @@ export interface IEmployeeListCtrlScope {
     reverse: boolean;
 }
 
-class EmployeeListCtrl implements IEmployeeListCtrlScope{
-    static $inject = ['$scope', 'employeeList'];
+class EmployeeListCtrl implements IEmployeeListCtrlScope {
+    static $inject: Array < string > = ['employeeList'];
     public empData: any;
     public headers: any;
     public tData: any;
     public reverse: boolean;
-    public constructor(public $scope: IEmployeeListCtrlScope
-        , private employeeList: any) {
-        var vm = this;    
+    public constructor(private employeeList: any) {
+        var vm = this;
         vm.reverse = false;
 
         //Load employee list 
