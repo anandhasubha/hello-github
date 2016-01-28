@@ -29,13 +29,13 @@ app.config(['$routeProvider', 'appConstant',
                 resolve: {
                     checkifIdExists: function($q, $route, employeeSrvc, $location) {
                         var defer = $q.defer();
-                        if (employeeSrvc.getEmployee($route.current.params.id)) {
-                            defer.resolve({});
+                        if ((!isNaN($route.current.params.id)) && employeeSrvc.getEmployee($route.current.params.id)) {
+                            defer.resolve();
                         } else {
                             $location.path('/employees');
+                            defer.reject()
                         }
                         return defer.promise;
-
                     }
                 }
             }).otherwise({
