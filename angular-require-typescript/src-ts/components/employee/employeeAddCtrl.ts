@@ -23,8 +23,12 @@ export class EmployeeAddCtrl implements IEmployeeAddCtrlScope {
     public constructor(private $location: ng.ILocationService,
         private $routeParams: any, private employeeSrvc: any, private ToastrSrvc: any) {
         var vm = this;
+
+        var newId = Math.max.apply(Math, employeeSrvc.getEmpList().recordSet.map(function(employee) {
+            return employee.id;
+        }));
         vm.empData = {
-            id: (Math.round(Math.random() * 1000))
+            id: ++newId
         }
 
         vm.addDone = () => {
