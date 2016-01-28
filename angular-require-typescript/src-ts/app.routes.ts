@@ -15,6 +15,7 @@ app.config(['$routeProvider', 'appConstant',
             .when('/employees', {
                 templateUrl: "components/employee/partials/listEmployee.html",
                 controller: "employeeListCtrl",
+                controllerAs:'employees',
                 resolve: {
                     employeeList: function(employeeSrvc) {
                         return employeeSrvc.getEmployees();
@@ -26,6 +27,7 @@ app.config(['$routeProvider', 'appConstant',
             }).when('/employee/:id', {
                 templateUrl: "components/employee/partials/editEmployee.html",
                 controller: 'employeeEditCtrl',
+                controllerAs: 'edit',
                 resolve: {
                     checkifIdExists: function($q, $route, employeeSrvc, $location) {
                         var defer = $q.defer();

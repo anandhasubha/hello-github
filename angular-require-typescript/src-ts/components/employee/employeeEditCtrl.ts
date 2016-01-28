@@ -12,26 +12,27 @@ import employeeModule = require('./employeeModule');
 interface IEmployeeEditCtrlScope {
     empData: any;
     editDone: () => void;
-    cancelEdit: () => void;
+    closeEditPage: () => void;
 }
 
-export class EmployeeEditCtrl {
-    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc'];
-    public constructor(public $scope: IEmployeeEditCtrlScope, private $location: ng.ILocationService,
+export class EmployeeEditCtrl implements IEmployeeEditCtrlScope{
+    static $inject = ['$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc'];
+    public empData: any ={};
+    public editDone;
+    public closeEditPage;
+    public constructor(private $location: ng.ILocationService,
         private $routeParams: any, private employeeSrvc: any, private ToastrSrvc: any) {
-        $scope.empData = angular.copy(employeeSrvc.getEmployee($routeParams.id));
+        var vm=this; 
+        
+        vm.empData = angular.copy(employeeSrvc.getEmployee($routeParams.id));
 
-        $scope.editDone = function() {
-            employeeSrvc.updateEmployee($scope.empData)
+        vm.editDone = function() {
+            employeeSrvc.updateEmployee(vm.empData)
             ToastrSrvc.notifySuccess('Employee updated successfully');
-            closeEditPage();
+            vm.closeEditPage();
         };
-        
-        $scope.cancelEdit = function() {
-            closeEditPage();
-        };
-        
-        var closeEditPage = function() {
+       
+        vm.closeEditPage = function() {
             $location.path('/employee');
         };
     }

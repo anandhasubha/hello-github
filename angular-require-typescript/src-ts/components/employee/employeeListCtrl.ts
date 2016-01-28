@@ -17,17 +17,21 @@ export interface IEmployeeListCtrlScope {
     reverse: boolean;
 }
 
-class EmployeeListCtrl {
+class EmployeeListCtrl implements IEmployeeListCtrlScope{
     static $inject = ['$scope', 'employeeList'];
+    public empData: any;
+    public headers: any;
+    public tData: any;
+    public reverse: boolean;
     public constructor(public $scope: IEmployeeListCtrlScope
         , private employeeList: any) {
-
-        $scope.reverse = false;
+        var vm = this;    
+        vm.reverse = false;
 
         //Load employee list 
-        $scope.empData = employeeList;
-        $scope.headers = $scope.empData.fieldKeyMapping;
-        $scope.tData = $scope.empData.recordSet;
+        vm.empData = employeeList;
+        vm.headers = vm.empData.fieldKeyMapping;
+        vm.tData = vm.empData.recordSet;
     }
 }
 employeeModule.controller('employeeListCtrl', EmployeeListCtrl);
