@@ -12,14 +12,14 @@ import employeeModule = require('./employeeModule');
 interface IEmployeeAddCtrlScope {
     empData: any;
     addDone: () => void;
-    cancelAdd: () => void;
+    closeAddPage: () => void;
 }
 
 export class EmployeeAddCtrl implements IEmployeeAddCtrlScope {
     static $inject: Array < string > = ['$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc'];
     public empData: any = {};
     public addDone;
-    public cancelAdd;
+    public closeAddPage;
     public constructor(private $location: ng.ILocationService,
         private $routeParams: any, private employeeSrvc: any, private ToastrSrvc: any) {
         var vm = this;
@@ -30,14 +30,10 @@ export class EmployeeAddCtrl implements IEmployeeAddCtrlScope {
         vm.addDone = () => {
             employeeSrvc.addEmployee(vm.empData);
             ToastrSrvc.notifySuccess('Employee added successfully');
-            closeAddPage();
+            vm.closeAddPage();
         };
 
-        vm.cancelAdd = () => {
-            closeAddPage();
-        };
-
-        var closeAddPage = () => {
+        vm.closeAddPage = () => {
             $location.path('/employee');
         };
     }
