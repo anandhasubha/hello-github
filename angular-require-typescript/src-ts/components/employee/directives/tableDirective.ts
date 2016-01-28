@@ -29,20 +29,22 @@ class EmployeeTable implements ng.IDirective {
     templateUrl = 'components/employee/directives/tableView.html';
 
     constructor(private $filter: ng.IFilterService
-        , private $location: ng.ILocationService, private cacheSrvc: any) {
+        , private $location: ng.ILocationService, private employeeSrvc: any) {
     };
 
     link = (scope: IEmpTableDirScope, element: ng.IAugmentedJQuery, attrs: ng.IAttributes) => {
         var self = this;
         scope.editFn = function(id, index) {
             self.$location.path('/employee/' + id);
-        }
+        };
+        
         scope.deleteFn = function(index) {
             scope.tdata.splice(index, 1);
-            var empdata=self.cacheSrvc.get("empList",scope.tdata);
+            var empdata=self.employeeSrvc.getEmpList();
             empdata.recordSet=scope.tdata;
-            self.cacheSrvc.set("empList",empdata);
-        }
+            self.employeeSrvc.setEmpList(empdata)            
+        };
+        
         scope.sortBy_head = function(head) {
             scope.reverse = !scope.reverse;
             scope.tdata = self.$filter('orderBy')(scope.tdata, head, scope.reverse);
@@ -50,8 +52,8 @@ class EmployeeTable implements ng.IDirective {
     }
 
     static factory(): ng.IDirectiveFactory {
-        const directive = ($filter: ng.IFilterService, $location: ng.ILocationService, cacheSrvc: any) => new EmployeeTable($filter, $location, cacheSrvc);
-        directive.$inject = ['$filter','$location', 'cacheSrvc'];
+        const directive = ($filter: ng.IFilterService, $location: ng.ILocationService, employeeSrvc: any) => new EmployeeTable($filter, $location, employeeSrvc);
+        directive.$inject = ['$filter','$location', 'employeeSrvc'];
         return directive;
     }
 }
