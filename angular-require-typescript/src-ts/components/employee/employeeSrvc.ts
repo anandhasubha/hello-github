@@ -54,7 +54,7 @@ class EmployeeSrvc implements IEmployeeSrvc {
         } else {
             self.$http.get(self.appConstant.JSON_EMPLOYEES_LIST)
                 .success(function(response: any) {
-                    this.setEmpList(response.data);
+                    self.setEmpList(response.data);
                     deferred.resolve(response.data);
                 })
                 .error(function(response: any) {
