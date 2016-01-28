@@ -10,7 +10,7 @@ header h4 {
 
 table.normal {
     width: 100%;
-    border:solid 1px #222222;
+    border:solid 1px #4e4e4e;
     border-collapse: collapse;
     margin-top: 10px;
 }
@@ -18,17 +18,18 @@ table.normal {
 .normal th {
     padding: 5px;
     color: #fff;
+    font-weight: normal;
 }
 
 .normal th,
 .normal td {
-    border: 1px solid #222222;
+    border: 1px solid #4e4e4e;
     text-align: left;
 
 }
 
 th {
-    background-color: #222222;
+    background-color: #4e4e4e;
 }
 
 tr:nth-child(even) {
@@ -40,7 +41,8 @@ tr:nth-child(odd) {
 }
 
 .normal tbody tr:hover {
-    background: #ADD8E6;
+    background: #949494;
+    color:#fff;
 }
 
 button,
@@ -50,12 +52,12 @@ th {
 
 button {
     margin: 5px;
-    background: #F39C12;
+    background: #4e4e4e;
     padding: 3px 10px 3px 5px !important;
     height: 35px;
-    border: 1px solid #F39C12;
+    border: 1px solid #4e4e4e;
     border-radius: 3px;
-    color: #000;
+    color: #fff;
 }
 
 button.hover {
@@ -68,9 +70,9 @@ button:disabled {
 }
 
 button.deleteBtn {
-    background: #A22B2B;
+    background: rgba(150, 110, 48, 0.87);
     padding: 3px 10px 3px 5px;
-    border: 1px solid #A22B2B;
+    border: 1px solid rgba(150, 110, 48, 0.87);
     border-radius: 3px;
     color: #000;
 }
@@ -187,14 +189,14 @@ input.ng-valid.ng-dirty {
 }
 .employeeForm .panel
 {
-    border:solid 1px #222222;
+    border:solid 1px #4e4e4e;
     margin-top:20px;
     border-radius: 4px;
 }
 .panel-primary > .panel-heading, .btn-primary,.btn-primary.disabled,.btn-primary.disabled:hover
 {
-    border:solid 1px #222222 !important;
-    background-color: #222222 !important;
+    border:solid 1px #4e4e4e !important;
+    background-color: #4e4e4e !important;
 }
 .employeeForm label
 {

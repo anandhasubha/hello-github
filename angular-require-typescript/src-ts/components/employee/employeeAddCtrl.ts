@@ -9,31 +9,35 @@
  */
 import employeeModule = require('./employeeModule');
 
-interface IEmployeeAddCtrlScope extends ng.IScope {
+interface IEmployeeAddCtrlScope {
     empData: any;
     addDone: () => void;
     cancelAdd: () => void;
 }
 
-export class EmployeeAddCtrl {
-    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc'];
-    public constructor(public $scope: IEmployeeAddCtrlScope, private $location: ng.ILocationService,
+export class EmployeeAddCtrl implements IEmployeeAddCtrlScope {
+    static $inject: Array < string > = ['$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc'];
+    public empData: any = {};
+    public addDone;
+    public cancelAdd;
+    public constructor(private $location: ng.ILocationService,
         private $routeParams: any, private employeeSrvc: any, private ToastrSrvc: any) {
-        $scope.empData= {
-            id:(Math.round(Math.random()*1000))
+        var vm = this;
+        vm.empData = {
+            id: (Math.round(Math.random() * 1000))
         }
-        
-        $scope.addDone = function() {            
-            employeeSrvc.addEmployee($scope.empData);
+
+        vm.addDone = () => {
+            employeeSrvc.addEmployee(vm.empData);
             ToastrSrvc.notifySuccess('Employee added successfully');
             closeAddPage();
         };
-        
-        $scope.cancelAdd = function() {
+
+        vm.cancelAdd = () => {
             closeAddPage();
         };
-        
-        var closeAddPage = function() {
+
+        var closeAddPage = () => {
             $location.path('/employee');
         };
     }

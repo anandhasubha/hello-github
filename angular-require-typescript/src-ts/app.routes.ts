@@ -23,7 +23,8 @@ app.config(['$routeProvider', 'appConstant',
                 }
             }).when('/employee/add', {
                 templateUrl: "components/employee/partials/addEmployee.html",
-                controller: 'employeeAddCtrl'
+                controller: 'employeeAddCtrl',
+                controllerAs: 'add',
             }).when('/employee/:id', {
                 templateUrl: "components/employee/partials/editEmployee.html",
                 controller: 'employeeEditCtrl',
