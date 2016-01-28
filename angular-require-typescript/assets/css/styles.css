@@ -10,22 +10,26 @@ header h4 {
 
 table.normal {
     width: 100%;
-    border:solid 1px #4e4e4e;
+    border: solid 1px #4e4e4e;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-.normal th {
-    padding: 5px;
-    color: #fff;
-    font-weight: normal;
-}
 
 .normal th,
 .normal td {
     border: 1px solid #4e4e4e;
     text-align: left;
+    padding:2px !important;
+}
+.normal th {
+    padding: 5px !important;
+    color: #fff;
+    font-weight: normal;
+}
 
+.normal td {
+    color:#000;
 }
 
 th {
@@ -42,7 +46,7 @@ tr:nth-child(odd) {
 
 .normal tbody tr:hover {
     background: #949494;
-    color:#fff;
+    color: #fff;
 }
 
 button,
@@ -76,10 +80,12 @@ button.deleteBtn {
     border-radius: 3px;
     color: #000;
 }
-button.deleteBtn,button.editBtn
-{
-    height:25px !important;
+
+button.deleteBtn,
+button.editBtn {
+    height: 25px !important;
 }
+
 .normal tbody tr:hover button.editBtn,
 .normal tbody tr:hover button.editBtn {
     color: #fff
@@ -167,7 +173,7 @@ form.caseForm input {
 /* Angular specific styles */
 
 input.ng-invalid.ng-dirty {
-    border:solid 1px orangered;
+    border: solid 1px orangered;
 }
 
 input.ng-valid.ng-dirty {
@@ -183,39 +189,52 @@ input.ng-valid.ng-dirty {
     margin-bottom: 0px;
 }
 
-.employeeForm input
-{
+.employeeForm input {
     border-radius: 3px;
 }
-.employeeForm .panel
-{
-    border:solid 1px #4e4e4e;
-    margin-top:20px;
+
+.employeeForm .panel {
+    border: solid 1px #4e4e4e;
+    margin-top: 20px;
     border-radius: 4px;
 }
-.panel-primary > .panel-heading, .btn-primary,.btn-primary.disabled,.btn-primary.disabled:hover
-{
-    border:solid 1px #4e4e4e !important;
+
+.panel-primary > .panel-heading,
+.btn-primary,
+.btn-primary.disabled,
+.btn-primary.disabled:hover {
+    border: solid 1px #4e4e4e !important;
     background-color: #4e4e4e !important;
 }
-.employeeForm label
-{
+
+.employeeForm label {
     font-weight: bold;
-    padding-right:0px !important;
+    padding-right: 0px !important;
 }
-.employeeForm
-{
+
+.employeeForm {
     padding-bottom: 20px;
 }
 
-input[ng-model="search"]
-{
-    height:30px !important;
-    border:solid 1px #ccc;
+input[ng-model="search"] {
+    height: 30px !important;
+    border: solid 1px #999999;
     border-radius: 3px;
 }
 
-/* Override toastr font size - affected by bootstrap */ 
+
+/* Override toastr font size - affected by bootstrap */
+
 #toast-container {
     font-size: 13px;
+}
+
+.fa-search {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+}
+
+.padd_zero {
+    padding: 0px;
 }

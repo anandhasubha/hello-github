@@ -43,7 +43,7 @@
                 <div class="fieldRow form-group">
                     <label class="control-label col-sm-2" for="phone">Phone :</label>
                     <div class="fField col-sm-10">
-                        <input name="employeePhone" ng-model="edit.empData.phone" required ng-pattern="/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/" class="form-control">
+                        <input name="employeePhone" ng-model="edit.empData.phone" required ng-pattern="/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/" class="form-control" placeholder="Ex: 215-255-1641">
                         <br />
                         <span ng-show="employeeForm.employeePhone.$error.pattern" class="error-msg">Invalid phone number!</span>
                     </div>
