@@ -30,7 +30,8 @@ require.config({
         'angular-route': '/assets/libs/angular-route',
         'angular-mocks': '/assets/libs/angular-mocks',
         'jquery': '/assets/libs/jquery',
-        'toastr': '/assets/libs/toastr'
+        'toastr': '/assets/libs/toastr',
+        'templates':'templates'
     },
 
     /**
@@ -52,6 +53,9 @@ require.config({
         },
         'angular-mocks': {
             deps: ['angular']
+        },
+        'templates':{
+             deps: ['angular']
         },
         priority: [
             'angular'

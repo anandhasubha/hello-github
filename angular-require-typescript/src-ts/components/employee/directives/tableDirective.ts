@@ -26,29 +26,34 @@ class EmployeeTable implements ng.IDirective {
         reverse: "="
     };
 
-    templateUrl = '/dist/components/employee/directives/tableView.html';
+    templateUrl = 'components/employee/directives/tableView.html';
 
     constructor(private $filter: ng.IFilterService
-        , private $location: ng.ILocationService) {
+        , private $location: ng.ILocationService, private employeeSrvc: any) {
     };
 
     link = (scope: IEmpTableDirScope, element: ng.IAugmentedJQuery, attrs: ng.IAttributes) => {
         var self = this;
         scope.editFn = function(id, index) {
             self.$location.path('/employee/' + id);
-        }
+        };
+        
         scope.deleteFn = function(index) {
             scope.tdata.splice(index, 1);
-        }
+            var empdata=self.employeeSrvc.getEmpList();
+            empdata.recordSet=scope.tdata;
+            self.employeeSrvc.setEmpList(empdata)            
+        };
+        
         scope.sortBy_head = function(head) {
             scope.reverse = !scope.reverse;
-            scope.tdata = this.$filter('orderBy')(scope.tdata, head, scope.reverse);
+            scope.tdata = self.$filter('orderBy')(scope.tdata, head, scope.reverse);
         };
     }
 
     static factory(): ng.IDirectiveFactory {
-        const directive = ($filter: ng.IFilterService, $location: ng.ILocationService) => new EmployeeTable($filter, $location);
-        directive.$inject = ['$filter','$location'];
+        const directive = ($filter: ng.IFilterService, $location: ng.ILocationService, employeeSrvc: any) => new EmployeeTable($filter, $location, employeeSrvc);
+        directive.$inject = ['$filter','$location', 'employeeSrvc'];
         return directive;
     }
 }

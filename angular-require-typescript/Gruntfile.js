@@ -1,22 +1,22 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     // load the task
     grunt.loadNpmTasks("grunt-ts");
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-angular-templates');
 
     // Configure grunt here
     grunt.initConfig({
         clean: {
-            dist: ['dist'],
-            test: ['test']
+            dist: ['dist']
         },
         copy: {
             htmlToDist: {
                 cwd: './src-ts',
                 expand: true,
-                src: ['**/*.html'],
+                src: ['index.html'],
                 dest: 'dist/'
             },
         },
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                 src: [
                     './typings/tsd.d.ts',
                     'src-ts/**/*.ts',
-                    // '!./**/*.d.ts',
+                // '!./**/*.d.ts',
                     '!./baseDir.ts'
                 ],
                 cwd: './',
@@ -57,18 +57,41 @@ module.exports = function(grunt) {
                 }
             },
         },
+
+        ngtemplates: {
+
+            options: {
+                module: 'angularApp.employee',
+                htmlmin: {
+                    collapseBooleanAttributes: true,
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    removeEmptyAttributes: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true
+                }
+
+            },
+
+            dist: {
+                cwd: 'src-ts',
+                src: 'components/employee/**/*.html',
+                dest: 'dist/templates.js',
+            }
+
+        }
     });
-
-    grunt.registerTask("default", ["ts:dev"]);
-    // grunt.registerTask("server", ["connect:server"]);
-
-    grunt.registerTask('server', function() {
+    grunt.registerTask('server', function () {
         grunt.task.run([
             'clean:dist',
             'ts:dist',
             'copy:htmlToDist',
-            'connect:server',
+            'ngtemplates:dist',
+            'connect:server'
         ]);
     });
 
+    grunt.registerTask("default", ['server']);
 }

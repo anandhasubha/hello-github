@@ -18,10 +18,13 @@
 ///<amd-dependency path="angular-route"/>
 ///<amd-dependency path="./config/appConstant"/>
 ///<amd-dependency path="./shared/toastrSrvc"/>
+///<amd-dependency path="./shared/cacheService"/>
 ///<amd-dependency path="./components/employee/employeeSrvc"/>
 ///<amd-dependency path="./components/employee/employeeListCtrl"/>
 ///<amd-dependency path="./components/employee/employeeEditCtrl"/>
+///<amd-dependency path="./components/employee/employeeAddCtrl"/>
 ///<amd-dependency path="./components/employee/directives/tableDirective"/>
+///<amd-dependency path="templates"/>
 
 var app = angular.module('angularApp', ['ngRoute',
         'angularApp.config',

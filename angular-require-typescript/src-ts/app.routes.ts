@@ -10,19 +10,37 @@
 import app = require('app');
 
 app.config(['$routeProvider', 'appConstant',
-    function($routeProvider:ng.route.IRouteProvider, appConstant) {
+    function($routeProvider: ng.route.IRouteProvider, appConstant) {
         $routeProvider
-            .when('/employee', {
+            .when('/employees', {
                 templateUrl: "components/employee/partials/listEmployee.html",
                 controller: "employeeListCtrl",
+                controllerAs:'employees',
                 resolve: {
                     employeeList: function(employeeSrvc) {
                         return employeeSrvc.getEmployees();
                     }
                 }
+            }).when('/employee/add', {
+                templateUrl: "components/employee/partials/addEmployee.html",
+                controller: 'employeeAddCtrl',
+                controllerAs: 'add',
             }).when('/employee/:id', {
                 templateUrl: "components/employee/partials/editEmployee.html",
-                controller: 'employeeEditCtrl'
+                controller: 'employeeEditCtrl',
+                controllerAs: 'edit',
+                resolve: {
+                    checkifIdExists: function($q, $route, employeeSrvc, $location) {
+                        var defer = $q.defer();
+                        if ((!isNaN($route.current.params.id)) && employeeSrvc.getEmployee($route.current.params.id)) {
+                            defer.resolve();
+                        } else {
+                            $location.path('/employees');
+                            defer.reject()
+                        }
+                        return defer.promise;
+                    }
+                }
             }).otherwise({
                 redirectTo: appConstant.PATH_DEFAULT_MODULE
             });

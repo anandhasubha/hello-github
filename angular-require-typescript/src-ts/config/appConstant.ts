@@ -15,11 +15,12 @@ configModule.constant('appConstant', {
     ERROR_MSG_TITLE: 'Alert!',
 
     /* path for json files */
-    JSON_EMPLOYEES_LIST: '/data/EmployeeList.json',
+    //JSON_EMPLOYEES_LIST: 'http://localhost:3000/data',
+    JSON_EMPLOYEES_LIST: '../data/EmployeeList.json',
 
     //Token
     AUTH_TOKEN: 'cDhhZG1pbjpQQHNzd29yZDE=',
 
     //Path
-    PATH_DEFAULT_MODULE: '/employee'
+    PATH_DEFAULT_MODULE: '/employees'
 });

@@ -1,6 +1,4 @@
 {
-    "success": "true",
-    "msg": "test msg",
     "data": {
         "fieldKeyMapping": {
             "id": "ID",

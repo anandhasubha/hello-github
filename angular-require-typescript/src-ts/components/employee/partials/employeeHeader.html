@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+   <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarHeader">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Employee Tracker</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarHeader">
+      <ul class="nav navbar-nav">
+        <li ng-class="{ active: isActive('/employees') }"><a ng-href="#/employees"><span class="glyphicon glyphicon-th-list"></span> Employees</a></li>
+        <li ng-class="{ active: isActive('/employee/add') }"><a ng-href="#/employee/add"><span class="glyphicon glyphicon-plus-sign"></span> Add Employee</a></li>  
+	    </ul>
+	 </div>
+  </div>
+</nav>

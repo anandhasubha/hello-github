@@ -1,49 +1,52 @@
-body {
-    font-size: 12px;
-    font-family: helvetica, calibri, arial;
-}
-
 /*header {
     margin: auto;
     width: 70%;
 }*/
 
-header h4{
+header h4 {
     margin: 0px 10px;
     color: lightgray;
 }
 
 table.normal {
     width: 100%;
+    border: solid 1px #4e4e4e;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-.normal th {
-    padding: 5px;
-}
 
 .normal th,
 .normal td {
-    border: 1px solid #F4F4F4;
-    border-collapse: collapse;
+    border: 1px solid #4e4e4e;
     text-align: left;
+    padding:2px !important;
+}
+.normal th {
+    padding: 5px !important;
+    color: #fff;
+    font-weight: normal;
+}
+
+.normal td {
+    color:#000;
 }
 
 th {
-    background-color: #EEEEEE;
+    background-color: #4e4e4e;
 }
 
 tr:nth-child(even) {
-    background: #F9F9F9
+    background: lightgrey;
 }
 
 tr:nth-child(odd) {
-    background: #FFFFFF
+    background: #FFFFFF;
 }
 
 .normal tbody tr:hover {
-    background: #ccc
+    background: #949494;
+    color: #fff;
 }
 
 button,
@@ -53,12 +56,12 @@ th {
 
 button {
     margin: 5px;
-    background: #00A65A;
-    padding: 3px 10px 3px 5px;
-    height: 25px;
-    border: 1px solid #00A65A;
+    background: #4e4e4e;
+    padding: 3px 10px 3px 5px !important;
+    height: 35px;
+    border: 1px solid #4e4e4e;
     border-radius: 3px;
-    color: #000;
+    color: #fff;
 }
 
 button.hover {
@@ -71,12 +74,16 @@ button:disabled {
 }
 
 button.deleteBtn {
-    background: #F39C12;
+    background: rgba(150, 110, 48, 0.87);
     padding: 3px 10px 3px 5px;
-    height: 25px;
-    border: 1px solid #E8483F;
+    border: 1px solid rgba(150, 110, 48, 0.87);
     border-radius: 3px;
     color: #000;
+}
+
+button.deleteBtn,
+button.editBtn {
+    height: 25px !important;
 }
 
 .normal tbody tr:hover button.editBtn,
@@ -86,7 +93,7 @@ button.deleteBtn {
 
 section.container {
     margin: auto;
-    width: 70%;    
+    width: 70%;
     min-width: 950px;
 }
 
@@ -96,6 +103,7 @@ section.container div {
 
 
 /* Case - Styles */
+
 nav.case {
     float: right;
     padding: 0px 10px;
@@ -162,37 +170,10 @@ form.caseForm input {
 }
 
 
-/* Employee module styles */
-
-form.employeeForm {
-    background-color: lightcyan;
-    width: 15%;
-    min-width: 170px;
-    margin: auto;
-    border: solid 1px gray;
-    text-align: center;
-}
-
-form.employeeForm div {
-    margin: 5px;
-    text-align: left;
-}
-
-form.employeeForm input {
-    padding: 1px 1px 2px 1px;
-    font: inherit;
-}
-
-form.employeeForm .action {
-    text-align: center;
-}
-
-
 /* Angular specific styles */
 
 input.ng-invalid.ng-dirty {
-    background-color: orangered;
-    color: white;
+    border: solid 1px orangered;
 }
 
 input.ng-valid.ng-dirty {
@@ -202,4 +183,58 @@ input.ng-valid.ng-dirty {
 .error-msg {
     color: red;
     font-size: 0.8em;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.employeeForm input {
+    border-radius: 3px;
+}
+
+.employeeForm .panel {
+    border: solid 1px #4e4e4e;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.panel-primary > .panel-heading,
+.btn-primary,
+.btn-primary.disabled,
+.btn-primary.disabled:hover {
+    border: solid 1px #4e4e4e !important;
+    background-color: #4e4e4e !important;
+}
+
+.employeeForm label {
+    font-weight: bold;
+    padding-right: 0px !important;
+}
+
+.employeeForm {
+    padding-bottom: 20px;
+}
+
+input[ng-model="search"] {
+    height: 30px !important;
+    border: solid 1px #999999;
+    border-radius: 3px;
+}
+
+
+/* Override toastr font size - affected by bootstrap */
+
+#toast-container {
+    font-size: 13px;
+}
+
+.fa-search {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+}
+
+.padd_zero {
+    padding: 0px;
 }
