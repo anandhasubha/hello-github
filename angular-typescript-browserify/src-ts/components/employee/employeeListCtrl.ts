@@ -7,17 +7,14 @@
  * and updates View state via scope.
 * </p>
 */
-
-import employeeModule = require('./employeeModule');
-
-export interface IEmployeeListCtrlScope {
+interface IEmployeeListCtrlScope {
     empData: any;
     headers: any;
     tData: any;
     reverse: boolean;
 }
 
-class EmployeeListCtrl {
+export class EmployeeListCtrl {
     static $inject = ['$scope', 'employeeList'];
     public constructor(public $scope: IEmployeeListCtrlScope
         , private employeeList: any) {
@@ -30,4 +27,4 @@ class EmployeeListCtrl {
         $scope.tData = $scope.empData.recordSet;
     }
 }
-employeeModule.controller('employeeListCtrl', EmployeeListCtrl);
+

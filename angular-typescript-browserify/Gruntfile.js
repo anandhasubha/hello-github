@@ -17,7 +17,7 @@ module.exports = function(grunt) {
             htmlToDist: {
                 cwd: './src-ts',
                 expand: true,
-                src: ['index.html'],
+                src: ['**/*.html'],
                 dest: 'dist/'
             },
         },
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
                     sourceMap: false,
                     target: 'es5', //es6 not supported yet
                     fast: 'never',
-                    module: 'amd'
+                    module: 'commonjs' //borwserify is compatible with commonjs ONLY
                 }
             }
         },
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
                     './dist/build.js': ['./dist/app.js']
                 },
                 options: {
-                    transform: ['deamdify'],
+                    // transform: ['deamdify'],
                 },
             }
         },
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
         ngtemplates: {
 
             options: {
-                module: 'angularApp.employee',
+                module: 'angularApp',
                 htmlmin: {
                     collapseBooleanAttributes: true,
                     collapseWhitespace: true,
@@ -95,8 +95,8 @@ module.exports = function(grunt) {
             'clean:dist',
             'ts:dist',
             'copy:htmlToDist',
-            // 'ngtemplates:dist',
             "browserify:dist",
+            // 'ngtemplates:dist',
             'connect'
         ]);
     });

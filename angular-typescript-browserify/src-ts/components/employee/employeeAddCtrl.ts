@@ -7,8 +7,6 @@
  * and updates the same employee.
  * </p>
  */
-import employeeModule = require('./employeeModule');
-
 interface IEmployeeAddCtrlScope extends ng.IScope {
     empData: any;
     addDone: () => void;
@@ -16,16 +14,16 @@ interface IEmployeeAddCtrlScope extends ng.IScope {
 }
 
 export class EmployeeAddCtrl {
-    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc'];
+    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'toastrSrvc'];
     public constructor(public $scope: IEmployeeAddCtrlScope, private $location: ng.ILocationService,
-        private $routeParams: any, private employeeSrvc: any, private ToastrSrvc: any) {
+        private $routeParams: any, private employeeSrvc: any, private toastrSrvc: any) {
         $scope.empData= {
             id:(Math.round(Math.random()*1000))
         }
         
         $scope.addDone = function() {            
             employeeSrvc.addEmployee($scope.empData);
-            ToastrSrvc.notifySuccess('Employee added successfully');
+            toastrSrvc.notifySuccess('Employee added successfully');
             closeAddPage();
         };
         
@@ -38,4 +36,3 @@ export class EmployeeAddCtrl {
         };
     }
 }
-employeeModule.controller('employeeAddCtrl', EmployeeAddCtrl);

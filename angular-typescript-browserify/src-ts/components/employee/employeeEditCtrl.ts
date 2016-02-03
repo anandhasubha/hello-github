@@ -7,8 +7,6 @@
  * and updates the same employee.
  * </p>
  */
-import employeeModule = require('./employeeModule');
-
 interface IEmployeeEditCtrlScope {
     empData: any;
     editDone: () => void;
@@ -16,14 +14,14 @@ interface IEmployeeEditCtrlScope {
 }
 
 export class EmployeeEditCtrl {
-    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'ToastrSrvc'];
+    static $inject = ['$scope', '$location', '$routeParams', 'employeeSrvc', 'toastrSrvc'];
     public constructor(public $scope: IEmployeeEditCtrlScope, private $location: ng.ILocationService,
-        private $routeParams: any, private employeeSrvc: any, private ToastrSrvc: any) {
+        private $routeParams: any, private employeeSrvc: any, private toastrSrvc: any) {
         $scope.empData = angular.copy(employeeSrvc.getEmployee($routeParams.id));
 
         $scope.editDone = function() {
             employeeSrvc.updateEmployee($scope.empData)
-            ToastrSrvc.notifySuccess('Employee updated successfully');
+            toastrSrvc.notifySuccess('Employee updated successfully');
             closeEditPage();
         };
         
@@ -36,4 +34,3 @@ export class EmployeeEditCtrl {
         };
     }
 }
-employeeModule.controller('employeeEditCtrl', EmployeeEditCtrl);

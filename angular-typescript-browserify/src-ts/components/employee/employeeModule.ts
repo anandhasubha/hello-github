@@ -14,7 +14,18 @@
  * </ul>
  * </p>
  */
+import employeeSrvc = require('./employeeSrvc');
+import employeeListCtrl = require('./employeeListCtrl');
+import employeeEditCtrl = require('./employeeEditCtrl');
+import employeeAddCtrl = require('./employeeAddCtrl');
+import employeeTable = require('./directives/tableDirective');
 
 var employeeModule = angular
         .module('angularApp.employee', []);
+employeeModule.service('employeeSrvc', employeeSrvc.EmployeeSrvc);
+employeeModule.controller('employeeListCtrl', employeeListCtrl.EmployeeListCtrl);
+employeeModule.controller('employeeEditCtrl', employeeEditCtrl.EmployeeEditCtrl);
+employeeModule.controller('employeeAddCtrl', employeeAddCtrl.EmployeeAddCtrl);
+employeeModule.directive('tableEmployee', employeeTable.EmployeeTable.factory());
+
 export = employeeModule;

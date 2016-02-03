@@ -7,11 +7,20 @@
  * Read More : https://github.com/CodeSeven/toastr.
  * </p>
  */
-import sharedModule = require('./sharedModule');
-var toastr = require('../../assets/libs/toastr.js');
+//Load jquery and toastr 
+require('jquery');
+var toastr = require('toastr');
 
-sharedModule.factory('ToastrSrvc', ['appConstant', function(appConstant) {
-    var options: ToastrOptions = {
+interface IToastrSrvc {
+    options: ToastrOptions;
+    notifyError: (msg: any) => void;
+    notifySuccess: (msg: any) => void;
+}
+
+export class ToastrSrvc implements IToastrSrvc {
+    static $inject = ['appConstant'];
+
+    options = {
         closeButton: true,
         debug: false,
         positionClass: 'toast-top-right', //'toast-top-full-width',
@@ -25,28 +34,16 @@ sharedModule.factory('ToastrSrvc', ['appConstant', function(appConstant) {
         showMethod: 'fadeIn',
         hideMethod: 'fadeOut'
     };
-    toastr.options = options;
 
-    return {
-        /**
-         * @ngdoc method
-         * @name app.util.ToastrSrvc#notifyError
-         * @methodOf app.util.ToastrSrvc
-         * @description To notify error messages
-         * @param {object} msg Message to notify error                 
-         */
-        notifyError: function(msg) {
-            toastr.error(msg, appConstant.ERROR_MSG_TITLE);
-        },
-        /**
-         * @ngdoc method
-         * @name app.util.ToastrSrvc#notifySuccess
-         * @methodOf app.util.ToastrSrvc
-         * @description To notify success messages
-         * @param {object} msg Message to notify success                 
-         */
-        notifySuccess: function(msg) {
-            toastr.success(msg, appConstant.SUCCESS_MSG_TITLE);
-        }
+    constructor(private appConstant: any) {
+        toastr.options = this.options;
     };
-}]);
+
+    notifyError = (msg) => {
+        toastr.error(msg, this.appConstant.ERROR_MSG_TITLE);
+    };
+
+    notifySuccess = (msg) => {
+        toastr.success(msg, this.appConstant.SUCCESS_MSG_TITLE);
+    };
+}

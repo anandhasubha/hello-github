@@ -6,8 +6,6 @@
  *  This emulates storing the data a lot like the server would.
  * </p>
  */
-import employeeModule = require('./employeeModule');
-
 interface Employee {
     id?: number
     name: string
@@ -25,7 +23,7 @@ interface EmpData{
     recordSet:Employee[]
 }
 
-export interface IEmployeeSrvc {
+interface IEmployeeSrvc {
     getEmployees: () => any;
     getEmployee: (empID: any) => Employee;
     addEmployee: (newEmp: Employee) => EmpData;
@@ -34,7 +32,7 @@ export interface IEmployeeSrvc {
     setEmpList: (empList) => void;
 }
 
-class EmployeeSrvc implements IEmployeeSrvc {
+export class EmployeeSrvc implements IEmployeeSrvc {
     static $inject = ['$http', '$q', 'appConstant', '$filter', 'cacheSrvc'];
 
     constructor(public $http: ng.IHttpService,
@@ -111,5 +109,3 @@ class EmployeeSrvc implements IEmployeeSrvc {
         this.cacheSrvc.set('empList', empList);
     };
 }
-
-employeeModule.service('employeeSrvc', EmployeeSrvc);

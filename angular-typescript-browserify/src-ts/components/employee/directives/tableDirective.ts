@@ -6,8 +6,6 @@
  * Builds the logic around employee table.
  * </p>
  */
-import employeeModule = require('../employeeModule');
-
 interface IEmpTableDirScope extends ng.IScope {
     tdata: any[];
     reverse: boolean;
@@ -16,7 +14,7 @@ interface IEmpTableDirScope extends ng.IScope {
     sortBy_head: (head: any) => void;
 }
 
-class EmployeeTable implements ng.IDirective {
+export class EmployeeTable implements ng.IDirective {
 
     restrict = 'E';
     scope = {
@@ -57,4 +55,3 @@ class EmployeeTable implements ng.IDirective {
         return directive;
     }
 }
-employeeModule.directive('tableEmployee', EmployeeTable.factory());

@@ -14,21 +14,56 @@
  * </p>
  */
 
-var jQuery = require('../assets/libs/jquery.js');
-require('../assets/libs/angular.js');
-require('../assets/libs/angular-route.js');
-require('./config/appConstant');
-require('./shared/toastrSrvc');
-require('./components/employee/employeeSrvc');
-require('./components/employee/employeeListCtrl');
-require('./components/employee/employeeEditCtrl');
-require('./components/employee/employeeAddCtrl');
-require('./components/employee/employeeListCtrl');
-require('./components/employee/directives/tableDirective'); 
+//Load angular libraries
+var angular: ng.IAngularStatic = require('angular');
+require('angular-route');
+require('angular-sanitize');
 
+//Load sub modules
+var configModule = require('./config/configModule');
+var sharedModule = require('./shared/sharedModule');
+var employeeModule = require('./components/employee/employeeModule');
+
+//Init app
 var app = angular.module('angularApp', ['ngRoute', 'ngSanitize',
-        'angularApp.config',
-        'angularApp.shared',
-        'angularApp.employee'
-    ]);
-export = app;
+    configModule.name,
+    sharedModule.name,
+    employeeModule.name
+]).config(['$routeProvider', 'appConstant',
+    function($routeProvider: ng.route.IRouteProvider, appConstant) {
+        $routeProvider
+            .when('/employees', {
+                templateUrl: "components/employee/partials/listEmployee.html",
+                controller: "employeeListCtrl",
+                resolve: {
+                    employeeList: function(employeeSrvc) {
+                        return employeeSrvc.getEmployees();
+                    }
+                }
+            }).when('/employee/add', {
+                templateUrl: "components/employee/partials/addEmployee.html",
+                controller: 'employeeAddCtrl'
+            }).when('/employee/:id', {
+                templateUrl: "components/employee/partials/editEmployee.html",
+                controller: 'employeeEditCtrl',
+                resolve: {
+                    checkifIdExists: function($q, $route, employeeSrvc, $location) {
+                        var defer = $q.defer();
+                        if (employeeSrvc.getEmployee($route.current.params.id)) {
+                            defer.resolve({});
+                        } else {
+                            $location.path('/employees');
+                        }
+                        return defer.promise;
+
+                    }
+                }
+            }).otherwise({
+                redirectTo: appConstant.PATH_DEFAULT_MODULE
+            });
+        console.debug("Router configured");
+    }
+]);
+
+//Bootstrap app
+angular.bootstrap(document, ['angularApp']);
