@@ -1,0 +1,53 @@
+<div>
+    <input ng-model="search">
+
+<form name="myForm">
+ <div contenteditable
+      name="myWidget" ng-model="userContent"
+      strip-br="true"
+     maxlength="3"
+    ng-pattern="/^(?:1[8-9]|[2-9][0-9]|10[0])$/"
+      required></div>
+  <span ng-show="myForm.myWidget.$error.required">Required!</span>
+ <hr>
+ <textarea ng-model="userContent" aria-label="Dynamic textarea"></textarea>
+</form>
+
+    <div ng-repeat="objData in tdata | filter:search track by $index">
+<form name="myform{{$index}}">
+
+
+    <table class="normal">
+        <thead ng-if="$index == 0">
+            <tr>
+                <!-- <th> No </th> -->
+                <th ng-repeat="(key,data) in headers " ng-click="sortBy_head(key)">{{data}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr >
+                <td ng-repeat="(key,data) in objData">
+                    <div ng-switch on="key">
+                        <div ng-switch-when="Action">
+                            <button class="editBtn" ng-click="editFn(objData.id, $parent.$parent.$index)"> <i class="fa fa-fw fa-edit"></i> Edit</button>
+                            <button class="deleteBtn" ng-click="deleteFn($parent.$parent.$index)"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                        </div>
+                       <div ng-switch-when="id">
+                         {{data}}
+                         </div>
+<div ng-switch-when="name" strip-br="true" name="name{{$index}}" contentEditable="true" required ng-model="objData[key]"></div>
+<div ng-switch-when="age" strip-br="true" name="age{{$index}}" maxlength="3"  ng-pattern="/^(?:1[8-9]|[2-9][0-9]|10[0])$/" contentEditable="true" required ng-model="objData[key]"></div>
+<div ng-switch-when="address" strip-br="true" name="adress{{$index}}" contentEditable="true" required ng-model="objData[key]"></div>
+<div ng-switch-when="city" strip-br="true" name="city{{$index}}" contentEditable="true" required ng-model="objData[key]"></div>
+<div ng-switch-when="state" strip-br="true" name="state{{$index}}" contentEditable="true" required ng-model="objData[key]"></div>
+<div ng-switch-when="postalCode"strip-br="true" name="postalCode{{$index}}" contentEditable="true" required ng-model="objData[key]"></div>
+<div ng-switch-when="phone" strip-br="true" name="phone{{$index}}" ng-pattern="/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/" contentEditable="true" required ng-model="objData[key]"></div>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+    </div>
+</div>

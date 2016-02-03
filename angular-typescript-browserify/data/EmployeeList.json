@@ -1,0 +1,106 @@
+{
+    "data": {
+        "fieldKeyMapping": {
+            "id": "ID",
+            "name": "Employee Name",
+            "age": "Age",
+            "address": "Office Address",
+            "city": "City",
+            "state": "State",
+            "postalCode": "Postal Code",
+            "phone": "Phone",
+            "Action": "Actions"
+        },
+        "recordSet": [{
+            "id" : 1,
+            "name": "Kris Merrier",
+            "age": 30,
+            "address": "228 Runamuck Pl #2808",
+            "city": "Baltimore",
+            "state": "MD",
+            "postalCode": "21224",
+            "phone": "410-669-1642",
+            "Action": ""
+        }, {
+            "id" : 2,
+            "name": "Dyan Oldroyd",
+            "age": 28,
+            "address": "7219 Woodfield Rd",
+            "city": "Overland Park",
+            "state": "KS",
+            "postalCode": "66204",
+            "phone": "913-413-4604",
+            "Action": ""
+        }, {
+            "id" : 3,
+            "name": "Lavera Perin",
+            "age": 33,
+            "address": "678 3rd Ave",
+            "city": "Miami",
+            "state": "FL",
+            "postalCode": "33196",
+            "phone": "305-606-7291",
+            "Action": ""
+        }, {
+            "id" : 4,
+            "name": "Emerson Bowley",
+            "age": 45,
+            "address": "762 S Main St",
+            "city": "Madison",
+            "state": "WI",
+            "postalCode": "53711",
+            "phone": "608-336-7444",
+            "Action": ""
+        }, {
+            "id" : 5,
+            "name": "Lorrie Nestle",
+            "age": 33,
+            "address": "71 San Mateo Ave",
+            "city": "Wayne",
+            "state": "PA",
+            "postalCode": "19087",
+            "phone": "610-814-5533",
+            "Action": ""
+        }, {
+            "id" : 6,
+            "name": "Shenika Seewald",
+            "age": 25,
+            "address": "14302 Pennsylvania Ave",
+            "city": "Huntingdon Valley",
+            "state": "PA",
+            "postalCode": "21742",
+            "phone": "215-211-9589",
+            "Action": ""
+        }, {
+            "id" : 7,
+            "name": "Cecily Hollack",
+            "age": 39,
+            "address": "59 N Groesbeck Hwy",
+            "city": "Austin",
+            "state": "TX",
+            "postalCode": "78731",
+            "phone": "512-486-3817",
+            "Action": ""
+        }, {
+            "id" : 8,
+            "name": "Kawin Morocco",
+            "age": 31,
+            "address": "701 S Harrison Rd",
+            "city": "San Francisco",
+            "state": "CA",
+            "postalCode": "94104",
+            "phone": "415-315-2761",
+            "Action": ""
+        }, {
+            "id" : 9,
+            "name": "Tyra Shields",
+            "age": 27,
+            "address": "3 Fort Worth Ave",
+            "city": "Philadelphia",
+            "state": "PA",
+            "postalCode": "19106",
+            "phone": "215-255-1641",
+            "Action": ""
+        }]
+    }
+}
