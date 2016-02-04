@@ -19,8 +19,7 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-connect": "~0.8.0",
     "grunt-contrib-copy": "^0.8.2",
-    "grunt-ts": "^5.3.2",
-    "tsify": "^0.13.2" //todo
+    "tsify": "^0.13.2" 
   },
   "engine": "node >= 0.10.21",
   "scripts": {

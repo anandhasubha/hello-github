@@ -1,7 +1,6 @@
 module.exports = function(grunt) {
 
     // load the task
-    grunt.loadNpmTasks("grunt-ts");
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
@@ -21,46 +20,36 @@ module.exports = function(grunt) {
                 dest: 'dist/'
             },
         },
-        ts: {
+
+        browserify: {
             dist: {
                 src: [
                     './typings/tsd.d.ts',
                     'src-ts/**/*.ts',
-                    // '!./**/*.d.ts',
                     '!./baseDir.ts'
                 ],
-                outDir: 'dist',
+                dest: './dist/build.js',
                 options: {
-                    compile: true,
-                    declaration: false,
-                    failOnTypeErrors: true,
-                    noImplicitAny: false,
-                    noResolve: false,
-                    removeComments: true,
-                    sourceMap: false,
-                    target: 'es5', //es6 not supported yet
-                    fast: 'never',
-                    module: 'commonjs' //borwserify is compatible with commonjs ONLY
-                }
-            }
-        },
-        browserify: {
-            dist: {
-                files: {
-                    './dist/build.js': ['./dist/app.js']
+                    browserifyOptions: {
+                        plugin: [
+                            ['tsify', {
+                                extensions: 'jsx'
+                            }]
+                        ],
+                        watch: false
+                    }
                 },
-                options: {
-                    // transform: ['deamdify'],
-                },
-            }
+            },
         },
+
         connect: {
             default: {
                 options: {
                     port: 8000,
                     base: ".",
                     debug: true,
-                    keepalive: true
+                    keepalive: true,
+                    open: 'http://localhost:8000/dist/index.html'
                 }
             }
         },
@@ -93,10 +82,8 @@ module.exports = function(grunt) {
     grunt.registerTask('server', function() {
         grunt.task.run([
             'clean:dist',
-            'ts:dist',
             'copy:htmlToDist',
             "browserify:dist",
-            // 'ngtemplates:dist',
             'connect'
         ]);
     });

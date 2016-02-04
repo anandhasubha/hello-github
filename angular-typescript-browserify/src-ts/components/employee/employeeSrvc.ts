@@ -45,14 +45,14 @@ export class EmployeeSrvc implements IEmployeeSrvc {
     getEmployees = () => {
         var self = this;
         var deferred = self.$q.defer();
-        var empList = this.getEmpList();
+        var empList = self.getEmpList();
 
         if (empList !== null && empList !== undefined) {
             deferred.resolve(empList);
         } else {
             self.$http.get(self.appConstant.JSON_EMPLOYEES_LIST)
                 .success(function(response: any) {
-                    this.setEmpList(response.data);
+                    self.setEmpList(response.data);
                     deferred.resolve(response.data);
                 })
                 .error(function(response: any) {

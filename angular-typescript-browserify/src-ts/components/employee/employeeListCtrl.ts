@@ -7,7 +7,7 @@
  * and updates View state via scope.
 * </p>
 */
-interface IEmployeeListCtrlScope {
+interface IEmployeeListCtrlScope extends ng.IScope {
     empData: any;
     headers: any;
     tData: any;

@@ -7,7 +7,7 @@
  * and updates the same employee.
  * </p>
  */
-interface IEmployeeEditCtrlScope {
+interface IEmployeeEditCtrlScope extends ng.IScope {
     empData: any;
     editDone: () => void;
     cancelEdit: () => void;
