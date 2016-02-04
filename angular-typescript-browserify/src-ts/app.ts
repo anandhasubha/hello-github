@@ -65,5 +65,4 @@ var app = angular.module('angularApp', ['ngRoute', 'ngSanitize',
     }
 ]);
 
-//Bootstrap app
-angular.bootstrap(document, ['angularApp']);
+export = app;

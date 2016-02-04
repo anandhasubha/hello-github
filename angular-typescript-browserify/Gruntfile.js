@@ -5,8 +5,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks("grunt-browserify");
-    grunt.loadNpmTasks('grunt-angular-templates');
-
+    
     // Configure grunt here
     grunt.initConfig({
         clean: {
@@ -16,7 +15,7 @@ module.exports = function(grunt) {
             htmlToDist: {
                 cwd: './src-ts',
                 expand: true,
-                src: ['**/*.html'],
+                src: ['index.html'],
                 dest: 'dist/'
             },
         },
@@ -26,7 +25,9 @@ module.exports = function(grunt) {
                 src: [
                     './typings/tsd.d.ts',
                     'src-ts/**/*.ts',
-                    '!./baseDir.ts'
+                    '!./baseDir.ts',
+                    'src-ts/**/*.html',
+                    '!src-ts/index.html'
                 ],
                 dest: './dist/build.js',
                 options: {
@@ -37,7 +38,13 @@ module.exports = function(grunt) {
                             }]
                         ],
                         watch: false
-                    }
+                    },
+                    transform:
+                        [["browserify-ng-html2js", {
+                            module: "angularApp",
+                            baseDir: "./src-ts/"
+                        }]
+                    ]
                 },
             },
         },
@@ -52,31 +59,6 @@ module.exports = function(grunt) {
                     open: 'http://localhost:8000/dist/index.html'
                 }
             }
-        },
-
-        ngtemplates: {
-
-            options: {
-                module: 'angularApp',
-                htmlmin: {
-                    collapseBooleanAttributes: true,
-                    collapseWhitespace: true,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true
-                }
-
-            },
-
-            dist: {
-                cwd: 'src-ts',
-                src: 'components/employee/**/*.html',
-                dest: 'dist/templates.js',
-            }
-
         }
     });
     grunt.registerTask('server', function() {
