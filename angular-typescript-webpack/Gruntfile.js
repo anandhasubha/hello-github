@@ -9,9 +9,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-json-server');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-webpack');
-    
-    console.log("%%%%%%&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7",path.resolve(__dirname, './src-ts'));
-
+   
     // Configure grunt here
     grunt.initConfig({
         clean: {
@@ -41,17 +39,23 @@ module.exports = function (grunt) {
         webpack: {
             defaultDev: {
                 // webpack options
-                entry: './src-ts/bootstrap.ts',
+                entry: './src-ts/app.bootstrap.ts',
                 vendor: ["jquery", "angular", "angular-route", "angular-sanitize"],
                 output: {
                     path: __dirname + '/dist',
                     filename: 'bundle.js'
                 },
                 plugins: [
-                    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js")
+                    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
+                    // This plugin minifies all the Javascript code of the final bundle
+                    new webpack.optimize.UglifyJsPlugin({
+                        mangle:   false,
+                        compress: {
+                            warnings: false, // Suppress uglification warnings
+                        },
+                    })
                 ],
                 resolve: {
-                    // Add `.ts` and `.tsx` as a resolvable extension.
                     extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css', '.yeti.css', '.min.css', '.eot', '.woff', '.woff2', '.svg', '.html'],
                     alias: {
                         // Bind version of jquery, angular, angular-route with alias names
@@ -72,8 +76,8 @@ module.exports = function (grunt) {
                         }
                     ],
                     loaders: [
-                        // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-                        { test: /\.tsx?$/, loader: 'ts-loader' },
+                        // all files with a `.ts` extension will be handled by `ts-loader`
+                        { test: /\.ts$/, loader: 'ts-loader' },
                         //all files with a '.css' extension will be handled by 'style-loader','file-loader','url-loader' and 'css-loader'
                         {
                             test: /\.css$/,
@@ -86,7 +90,8 @@ module.exports = function (grunt) {
                             loader: "file-loader"
                         }, {
                             test: /\.html$/,
-                            loader: 'ngtemplate?relativeTo=' + (path.resolve(__dirname, './src-ts')) + '/!html'
+                            module:'angularApp',
+                            loader: 'ngtemplate?module=angularApp&relativeTo=' + (path.resolve(__dirname, './src-ts')) + '/!html'
                         }
                     ]
                 }
@@ -94,14 +99,12 @@ module.exports = function (grunt) {
 
         }
         
-        
-
     });
     
     
     
 
-    grunt.registerTask("default", ["ts:dev"]);
+    grunt.registerTask("default", 'server');
 
     grunt.registerTask('server', function () {
         grunt.task.run([

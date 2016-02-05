@@ -1,25 +1,20 @@
-
-
-require("./components/employee/partials/editEmployee.html")
-require("./components/employee/partials/listEmployee.html")
-require("./components/employee/partials/addEmployee.html")
 export class routeConfig{
     static $inject = ['$routeProvider', 'appConstant'];
     constructor($routeProvider: ng.route.IRouteProvider, appConstant) {
         $routeProvider
             .when('/employees', {
-                templateUrl: require("./components/employee/partials/listEmployee.html"),
+                templateUrl: 'components/employee/partials/listEmployee.html',
                 controller: "employeeListCtrl",
                 resolve: {
-                    employeeList: function(employeeSrvc) {
+                    employeeList: function(employeeSrvc, $templateCache) {
                         return employeeSrvc.getEmployees();
                     }
                 }
             }).when('/employee/add', {
-                templateUrl: require("./components/employee/partials/addEmployee.html"),
+                templateUrl: 'components/employee/partials/addEmployee.html',
                 controller: 'employeeAddCtrl'
             }).when('/employee/:id', {
-                templateUrl: require("./components/employee/partials/editEmployee.html"),
+                templateUrl: 'components/employee/partials/editEmployee.html',
                 controller: 'employeeEditCtrl',
                 resolve: {
                     checkifIdExists: function($q, $route, employeeSrvc, $location) {

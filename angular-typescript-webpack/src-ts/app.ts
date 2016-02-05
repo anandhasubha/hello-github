@@ -26,12 +26,10 @@ require("../assets/css/styles.css");
 require('./shared/toastrSrvc.ts');
 
 //Load sub modules
-var route=require('./routeConfig');
+var route=require('./app.routeConfig');
 var configModule = require('./config/configModule');
 var sharedModule = require('./shared/sharedModule');
 var employeeModule = require('./components/employee/employeeModule');
-
-
 
 //Init app
 var app = angular.module('angularApp', ['ngRoute', 'ngSanitize',
