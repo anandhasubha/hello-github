@@ -8,7 +8,7 @@
  * </p>
  */
 //Load jquery and toastr 
-require('../../assets/libs/jquery.js');
+require('../../assets/libs/jquery.min.js');
 var toastr = require('../../assets/libs/toastr.js'); 
 
 interface IToastrSrvc {
