@@ -5,7 +5,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks("grunt-browserify");
-    
+    grunt.loadNpmTasks("grunt-contrib-uglify");
+
     // Configure grunt here
     grunt.initConfig({
         clean: {
@@ -24,7 +25,7 @@ module.exports = function(grunt) {
             dist: {
                 src: [
                     './typings/tsd.d.ts',
-                    'src-ts/**/*.ts',
+                    'src-ts/app.bootstrap.ts',
                     '!./baseDir.ts',
                     'src-ts/**/*.html',
                     '!src-ts/index.html'
@@ -34,13 +35,13 @@ module.exports = function(grunt) {
                     browserifyOptions: {
                         plugin: [
                             ['tsify', {
-                                extensions: 'jsx'
+                                extensions: 'ts'
                             }]
                         ],
                         watch: false
                     },
-                    transform:
-                        [["browserify-ng-html2js", {
+                    transform: [
+                        ["browserify-ng-html2js", {
                             module: "angularApp",
                             baseDir: "./src-ts/"
                         }]
@@ -59,6 +60,13 @@ module.exports = function(grunt) {
                     open: 'http://localhost:8000/dist/index.html'
                 }
             }
+        },
+        uglify: {
+            build: {
+                files: {
+                    './dist/build.min.js': ['./dist/build.js']
+                }
+            }
         }
     });
     grunt.registerTask('server', function() {
@@ -66,6 +74,7 @@ module.exports = function(grunt) {
             'clean:dist',
             'copy:htmlToDist',
             "browserify:dist",
+            "uglify:build",
             'connect'
         ]);
     });

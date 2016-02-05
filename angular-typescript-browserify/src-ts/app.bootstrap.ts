@@ -1,3 +1,7 @@
+var angular: ng.IAngularStatic = require('angular');
+require('angular-sanitize');
+require('angular-route');
+
 import app = require('./app');
 
 //Bootstrap app
