@@ -46,6 +46,7 @@ module.exports = function (grunt) {
                     filename: 'bundle.js'
                 },
                 plugins: [
+                    // optimise the files into chunks 
                     new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
                     // This plugin minifies all the Javascript code of the final bundle
                     new webpack.optimize.UglifyJsPlugin({
@@ -53,19 +54,21 @@ module.exports = function (grunt) {
                         compress: {
                             warnings: false, // Suppress uglification warnings
                         },
+                        exclude:/\.min.js$/
                     })
                 ],
                 resolve: {
-                    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css', '.yeti.css', '.min.css', '.eot', '.woff', '.woff2', '.svg', '.html'],
+                    // Array of all the possible extensions to load
+                    extensions: ['', '.min.js','.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css', '.yeti.css', '.min.css', '.eot', '.woff', '.woff2', '.svg', '.html'],
                     alias: {
                         // Bind version of jquery, angular, angular-route with alias names
-                        "jquery": "../assets/libs/jquery.js",
+                        "jquery": "../assets/libs/jquery.min.js",
 
-                        "angular": "../assets/libs/angular.js",
+                        "angular": "../assets/libs/angular.min.js",
 
-                        "angular-route": "../assets/libs/angular-route.js",
+                        "angular-route": "../assets/libs/angular-route.min.js",
                         
-                        'angular-sanitize':'../assets/libs/angular-sanitize.js'
+                        'angular-sanitize':'../assets/libs/angular-sanitize.min.js'
                     }
                 },
                 module: {
@@ -89,6 +92,7 @@ module.exports = function (grunt) {
                             test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                             loader: "file-loader"
                         }, {
+                            //ngTemplate Loader to preload all the html content into template cache
                             test: /\.html$/,
                             module:'angularApp',
                             loader: 'ngtemplate?module=angularApp&relativeTo=' + (path.resolve(__dirname, './src-ts')) + '/!html'
@@ -101,9 +105,6 @@ module.exports = function (grunt) {
         
     });
     
-    
-    
-
     grunt.registerTask("default", 'server');
 
     grunt.registerTask('server', function () {
