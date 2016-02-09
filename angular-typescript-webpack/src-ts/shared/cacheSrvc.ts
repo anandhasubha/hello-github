@@ -9,15 +9,13 @@
  */
 interface ICacheSrvc {
     set: (key: any, value: any) => void;
-    get: (key: any) => string;
+    get: (key: any) => any;
 }
 
 export class CacheSrvc implements ICacheSrvc {
     static $inject = ['$cacheFactory'];
 
-    constructor(private $cacheFactory: any) {
-        // toastr.options = this.options;
-    };
+    constructor(private $cacheFactory: any) {};
 
     set = (key, value) => {
         window.localStorage.setItem(key, JSON.stringify(value));
